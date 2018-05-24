@@ -6,14 +6,7 @@ import javax.persistence.*;
  * Created by jt on 12/14/15.
  */
 @Entity
-public class User implements DomainObject {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
-    @Version
-    private Integer version;
+public class User extends AbstractDomainClass  {
 
     private String username;
 
@@ -23,29 +16,11 @@ public class User implements DomainObject {
     private String encryptedPassword;
     private Boolean enabled = true;
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private Customer customer;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Cart cart;
-
-    @Override
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
     public String getUsername() {
         return username;
@@ -95,4 +70,5 @@ public class User implements DomainObject {
     public void setCart(Cart cart) {
         this.cart = cart;
     }
+
 }

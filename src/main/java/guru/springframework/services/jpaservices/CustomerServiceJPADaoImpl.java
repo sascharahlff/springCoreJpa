@@ -1,6 +1,8 @@
 package guru.springframework.services.jpaservices;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import guru.springframework.domain.Customer;
+import guru.springframework.domain.User;
 import guru.springframework.services.CustomerService;
 import guru.springframework.services.security.EncryptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +60,6 @@ public class CustomerServiceJPADaoImpl extends AbstractJpaDaoService implements 
     @Override
     public void delete(Integer id) {
         EntityManager em = emf.createEntityManager();
-
         em.getTransaction().begin();
         em.remove(em.find(Customer.class, id));
         em.getTransaction().commit();
