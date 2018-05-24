@@ -25,7 +25,7 @@ public class Customer implements DomainObject {
     private String state;
     private String zipCode;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private User user;
 
     @Override
