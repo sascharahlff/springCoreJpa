@@ -1,5 +1,6 @@
 package guru.springframework.services.jpaservices;
 
+import guru.springframework.domain.Customer;
 import guru.springframework.domain.User;
 import guru.springframework.services.UserService;
 import guru.springframework.services.security.EncryptionService;
@@ -58,8 +59,11 @@ public class UserServiceJpaDaoImpl extends AbstractJpaDaoService implements User
     public void delete(Integer id) {
         EntityManager em = emf.createEntityManager();
 
+        User user = em.find(User.class, id);
+
         em.getTransaction().begin();
-        em.remove(em.find(User.class, id));
+        em.remove(user.getCustomer());
+        em.remove(user);
         em.getTransaction().commit();
     }
 }
