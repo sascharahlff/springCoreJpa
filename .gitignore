@@ -4,6 +4,9 @@
 #Idea
 .idea
 
+#Maven
+target/
+
 #OSX
 .DS_Store
 
