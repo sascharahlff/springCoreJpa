@@ -63,9 +63,11 @@ public class CustomerServiceJPADaoImpl extends AbstractJpaDaoService implements 
         Customer customer = em.find(Customer.class, id);
 
         em.getTransaction().begin();
+
         if (customer.getUser() != null) {
             em.remove(customer.getUser());
         }
+
         em.remove(customer);
         em.getTransaction().commit();
     }

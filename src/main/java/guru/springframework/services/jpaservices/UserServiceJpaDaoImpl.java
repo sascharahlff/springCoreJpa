@@ -58,11 +58,14 @@ public class UserServiceJpaDaoImpl extends AbstractJpaDaoService implements User
     @Override
     public void delete(Integer id) {
         EntityManager em = emf.createEntityManager();
-
         User user = em.find(User.class, id);
 
         em.getTransaction().begin();
-        em.remove(user.getCustomer());
+
+        if (user.getCustomer() != null) {
+            em.remove(user.getCustomer());
+        }
+
         em.remove(user);
         em.getTransaction().commit();
     }
